@@ -22,8 +22,6 @@ return new class extends Migration {
                 $table->string("mobile", 50)->unique();
                 $table->string("password", 50);
                 $table->string("otp", 10);
-
-
                 $table->timestamps(); // This adds `created_at` and `updated_at` columns.
     
 
