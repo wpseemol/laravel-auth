@@ -13,7 +13,7 @@ class User extends Model
         "otp" => "0"
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
 
 }
