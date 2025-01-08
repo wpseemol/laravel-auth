@@ -22,7 +22,7 @@ class UserController extends Controller
      * @return User
      * Return User instance here.
      */
-    function UserRegistration(Request $request): User|null
+    function UserRegistration(Request $request): User
     {
 
 
@@ -32,17 +32,24 @@ class UserController extends Controller
         $mobile = $request->input("mobile");
         $password = $request->input("password");
 
-
-        $result = User::create([
+        $userArray = [
             "firstName" => $firstName,
             "lastName" => $lastName,
             "email" => $email,
             "mobile" => $mobile,
             "password" => $password
+        ];
 
+
+        return User::create([
+            "firstName" => $firstName,
+            "lastName" => $lastName,
+            "email" => $email,
+            "mobile" => $mobile,
+            "password" => $password
         ]);
 
-        return $result;
+        // return $userArray;
     }
 
 

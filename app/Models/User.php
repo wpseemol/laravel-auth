@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $fillable = ["firstName", "lastName", "email", "mobile", "password", "otp"];
+    protected $fillable = ["firstName", "lastName", "email", "mobile", "password",];
 
     protected $attributes = [
-        "otp" => ""
+        "otp" => "0"
     ];
+
+    public $timestamps = true;
 
 
 }
