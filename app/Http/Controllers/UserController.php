@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
-
+use PhpParser\Node\Stmt\TryCatch;
 
 /**
  * Summary of UserController
@@ -22,32 +23,43 @@ class UserController extends Controller
      * @return User
      * Return User instance here.
      */
-    function UserRegistration(Request $request): User
+    function UserRegistration(Request $request): JsonResponse
     {
 
 
-        $firstName = $request->input("firstName");
-        $lastName = $request->input("lastName");
-        $email = $request->input("email");
-        $mobile = $request->input("mobile");
-        $password = $request->input("password");
 
-        $userArray = [
-            "firstName" => $firstName,
-            "lastName" => $lastName,
-            "email" => $email,
-            "mobile" => $mobile,
-            "password" => $password
-        ];
+        try {
+
+            $validatedData = $request->validate([
+                "firstName" => "required|string|max:50",
+                "lastName" => "required|string|max:50",
+                "email" => "required|string|unique:users,email",
+                "mobile" => "required|string|max:30",
+                "password" => "required|string|max:50"
+            ], );
 
 
-        return User::create([
-            "firstName" => $firstName,
-            "lastName" => $lastName,
-            "email" => $email,
-            "mobile" => $mobile,
-            "password" => $password
-        ]);
+            // $validatedData["password"] = bcrypt($validatedData["password"]);
+
+
+            $user = User::create($validatedData);
+
+            return response()->json(["message" => "User registered successful!", "user" => $user], 201);
+
+        } catch (Exception $error) {
+
+
+            return response()->json([
+                "status" => "failed",
+                "message" => $error->getMessage(),
+                "error" => $error
+            ], 422);
+
+
+
+        }
+
+
 
         // return $userArray;
     }

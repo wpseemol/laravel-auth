@@ -13,7 +13,7 @@ class User extends Model
         "otp" => "0"
     ];
 
-    public $timestamps = false;
+    public $timestamps = true; // when timestamp create_at or update_at custom that time need to false.
 
 
 }

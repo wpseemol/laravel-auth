@@ -19,13 +19,13 @@ return new class extends Migration {
                 $table->string("firstName", 50);
                 $table->string("lastName", 50);
                 $table->string("email", 50)->unique();
-                $table->string("mobile", 50)->unique();
+                $table->string("mobile", 30)->unique();
                 $table->string("password", 50);
                 $table->string("otp", 10);
-                $table->timestamp("created_at")->useCurrent();
-                $table->timestamp("update_at")->useCurrent()->useCurrentOnUpdate();
-
-                // $table->timestamps(); // This adds `created_at` and `updated_at` columns.
+                // $table->timestamp("created_at")->useCurrent();
+                // $table->timestamp("update_at")->useCurrent()->useCurrentOnUpdate();
+    
+                $table->timestamps(); // This adds `created_at` and `updated_at` columns.
     
 
             }
